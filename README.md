@@ -28,10 +28,11 @@ A complete library management system with React frontend and C++ REST API backen
 - Monitor membership status
 
 ### 📊 Reports & Analytics
-- Visual bar charts of most issued books
+- Visual radar chart of most issued books
 - Real-time statistics
 - Issue tracking metrics
 - Summary cards for key metrics
+- Live graph updates after issue/return actions
 
 ## 🛠️ Tech Stack
 
@@ -63,7 +64,7 @@ A complete library management system with React frontend and C++ REST API backen
 ### 1. Setup Frontend
 
 ```bash
-cd c:\Users\itsun\OneDrive\Desktop\vs code\cpp project
+cd c:\Users\itsun\OneDrive\Desktop\vs code\cpp project copy
 npm install
 ```
 
@@ -113,6 +114,8 @@ npm run build
 ### Issue & Return Tracking
 - `GET /api/issued-books` - Get issued books
 - `GET /api/returned-books` - Get returned books
+- `POST /api/issue-book` - Issue a book
+- `POST /api/return-book` - Return a book
 
 ### Member Management
 - `GET /api/members` - Get all members
@@ -145,9 +148,9 @@ npm run build
 ```json
 {
   "id": 1,
-  "name": "Rahul Kumar",
+  "name": "Abhishek Kumar",
   "studentId": "23BCS10289",
-  "email": "rahul@example.com",
+  "email": "abhishek.kumar@example.com",
   "phone": "9876543210",
   "membershipDate": "2023-08-15",
   "booksIssued": 1,
@@ -172,7 +175,7 @@ npm run build
 3. **useEffect hook** triggers API calls to backend based on active feature
 4. **Backend** processes requests and returns JSON data
 5. **Frontend** renders data with beautiful animations and styling
-6. **Real-time updates** for search, analytics, and member management
+6. **Real-time updates** for search, member management, and analytics graph
 
 ## 🐛 Troubleshooting
 
@@ -201,11 +204,17 @@ npm run build
 ### Members
 - Abhishek Kumar(23BCS10289)
 - Sana (23BCS10113)
-- Abhishek (23BCS12427)
-### Issued Books
-- Operating Systems →Abhishek (Active)
-- Computer Networks → Sana  (Active)
-- Software Engineering → Avi (Overdue)
+- Abhishek Singh (23BCS12427)
+
+### Default Issued Graph Dataset
+1. DBMS → 2
+2. Algorithm Design → 3
+3. Computer Networks → 1
+4. Data Structures → 5
+5. Operating Systems → 1
+6. Software Engineering → 4
+
+> Note: Jab nayi book issue hoti hai, graph count live increase hota hai. Agar naya title issue ho, woh graph me auto-add ho jata hai.
 
 ## 🎯 Future Enhancements
 
