@@ -80,11 +80,9 @@ VALUES
 
 INSERT INTO members (name, student_id, email, phone, membership_date, books_issued, status) 
 VALUES 
-    ('Rahul Kumar', '23BCS10289', 'rahul@example.com', '9876543210', '2023-08-15', 1, 'Active'),
-    ('Priya Sharma', '23BCS10234', 'priya@example.com', '9876543211', '2023-08-16', 1, 'Active'),
-    ('Amit Singh', '23BCS10156', 'amit@example.com', '9876543212', '2023-08-17', 1, 'Active'),
-    ('Sneha Gupta', '23BCS10178', 'sneha@example.com', '9876543213', '2023-08-18', 0, 'Active'),
-    ('Vikram Patel', '23BCS10267', 'vikram@example.com', '9876543214', '2023-08-19', 0, 'Active');
+    ('Abhishek Kumar', '23BCS10289', 'abhishek.kumar@example.com', '9876543210', '2023-08-15', 1, 'Active'),
+    ('Sana', '23BCS10113', 'sana@example.com', '9876543211', '2023-08-16', 0, 'Active'),
+    ('Abhishek Singh', '23BCS12427', 'abhishek.singh@example.com', '9876543212', '2023-08-17', 0, 'Active');
 
 -- Create indexes for better query performance
 CREATE INDEX IF NOT EXISTS idx_books_status ON books(status);

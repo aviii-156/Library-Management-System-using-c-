@@ -199,16 +199,13 @@ npm run build
 4. Computer Networks - Forouzan (Available)
 
 ### Members
-- Rahul Kumar (23BCS10289)
-- Priya Sharma (23BCS10234)
-- Amit Singh (23BCS10156)
-- Sneha Gupta (23BCS10178)
-- Vikram Patel (23BCS10267)
-
+- Abhishek Kumar(23BCS10289)
+- Sana (23BCS10113)
+- Abhishek (23BCS12427)
 ### Issued Books
-- Operating Systems → Rahul Kumar (Active)
-- Computer Networks → Priya Sharma (Active)
-- Software Engineering → Amit Singh (Overdue)
+- Operating Systems →Abhishek (Active)
+- Computer Networks → Sana  (Active)
+- Software Engineering → Avi (Overdue)
 
 ## 🎯 Future Enhancements
 

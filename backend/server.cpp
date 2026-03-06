@@ -81,7 +81,7 @@ vector<Member> members;
 int nextBookId = 6;
 int nextIssuedId = 4;
 int nextReturnedId = 4;
-int nextMemberId = 6;
+int nextMemberId = 4;
 
 void initializeData() {
     // Initialize books
@@ -109,11 +109,9 @@ void initializeData() {
 
     // Initialize members
     members = {
-        {1, "Rahul Kumar", "23BCS10289", "rahul@example.com", "9876543210", "2023-08-15", 1, "Active"},
-        {2, "Priya Sharma", "23BCS10234", "priya@example.com", "9876543211", "2023-08-16", 1, "Active"},
-        {3, "Amit Singh", "23BCS10156", "amit@example.com", "9876543212", "2023-08-17", 1, "Active"},
-        {4, "Sneha Gupta", "23BCS10178", "sneha@example.com", "9876543213", "2023-08-18", 0, "Active"},
-        {5, "Vikram Patel", "23BCS10267", "vikram@example.com", "9876543214", "2023-08-19", 0, "Active"}
+        {1, "Abhishek Kumar", "23BCS10289", "abhishek.kumar@example.com", "9876543210", "2023-08-15", 1, "Active"},
+        {2, "Sana", "23BCS10113", "sana@example.com", "9876543211", "2023-08-16", 0, "Active"},
+        {3, "Abhishek Singh", "23BCS12427", "abhishek.singh@example.com", "9876543212", "2023-08-17", 0, "Active"}
     };
 }
 
