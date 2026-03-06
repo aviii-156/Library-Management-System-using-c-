@@ -82,6 +82,20 @@ function MainPage({ onBack }) {
     fetchData();
   }, [activeFeature]);
 
+  useEffect(() => {
+    if (activeFeature !== 'reports-analytics') {
+      return;
+    }
+
+    const intervalId = setInterval(() => {
+      fetchAnalytics();
+      fetchIssuedBooks();
+      fetchReturnedBooks();
+    }, 4000);
+
+    return () => clearInterval(intervalId);
+  }, [activeFeature]);
+
   const fetchData = async () => {
     setLoading(true);
     try {
@@ -101,6 +115,8 @@ function MainPage({ onBack }) {
           break;
         case 'reports-analytics':
           await fetchAnalytics();
+          await fetchIssuedBooks();
+          await fetchReturnedBooks();
           break;
       }
     } catch (error) {
@@ -780,6 +796,7 @@ function MainPage({ onBack }) {
         showNotification('✓ Book returned successfully!', 'success');
         await fetchIssuedBooks();
         await fetchReturnedBooks();
+        await fetchAnalytics();
       } else {
         showNotification('✗ Failed to return book', 'error');
       }
@@ -857,6 +874,7 @@ function MainPage({ onBack }) {
         setSelectedBookForIssue(null);
         setIsIssueBookModalOpen(false);
         await fetchIssuedBooks();
+        await fetchAnalytics();
       } else {
         showNotification('✗ Failed to issue book', 'error');
       }

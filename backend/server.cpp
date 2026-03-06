@@ -78,6 +78,8 @@ vector<Book> books;
 vector<IssuedBook> issuedBooks;
 vector<ReturnedBook> returnedBooks;
 vector<Member> members;
+map<string, int> issuedAnalyticsCounts;
+vector<string> issuedAnalyticsOrder;
 int nextBookId = 6;
 int nextIssuedId = 4;
 int nextReturnedId = 4;
@@ -112,6 +114,25 @@ void initializeData() {
         {1, "Abhishek Kumar", "23BCS10289", "abhishek.kumar@example.com", "9876543210", "2023-08-15", 1, "Active"},
         {2, "Sana", "23BCS10113", "sana@example.com", "9876543211", "2023-08-16", 0, "Active"},
         {3, "Abhishek Singh", "23BCS12427", "abhishek.singh@example.com", "9876543212", "2023-08-17", 0, "Active"}
+    };
+
+    // Initialize issued books analytics default dataset
+    issuedAnalyticsOrder = {
+        "DBMS",
+        "Algorithm Design",
+        "Computer Networks",
+        "Data Structures",
+        "Operating Systems",
+        "Software Engineering"
+    };
+
+    issuedAnalyticsCounts = {
+        {"DBMS", 2},
+        {"Algorithm Design", 3},
+        {"Computer Networks", 1},
+        {"Data Structures", 5},
+        {"Operating Systems", 1},
+        {"Software Engineering", 4}
     };
 }
 
@@ -198,25 +219,34 @@ string membersToJson() {
 }
 
 string analyticsToJson() {
-    vector<pair<string, int>> sortedBooks = {
-        {"DBMS", 25},
-        {"Data Structures", 18},
-        {"Operating Systems", 12},
-        {"Computer Networks", 10},
-        {"Clean Code", 7}
-    };
-    
-    // Get top 8
-    int maxCount = sortedBooks.empty() ? 1 : sortedBooks[0].second;
+    vector<pair<string, int>> chartBooks;
+    for (const auto& title : issuedAnalyticsOrder) {
+        auto it = issuedAnalyticsCounts.find(title);
+        if (it != issuedAnalyticsCounts.end()) {
+            chartBooks.push_back({ title, it->second });
+        }
+    }
+
+    // Include any dynamically added titles not in initial order
+    for (const auto& entry : issuedAnalyticsCounts) {
+        if (find(issuedAnalyticsOrder.begin(), issuedAnalyticsOrder.end(), entry.first) == issuedAnalyticsOrder.end()) {
+            chartBooks.push_back(entry);
+        }
+    }
+
+    int maxCount = 1;
+    for (const auto& entry : chartBooks) {
+        maxCount = max(maxCount, entry.second);
+    }
     
     stringstream json;
     json << "[";
-    for (size_t i = 0; i < min(sortedBooks.size(), size_t(8)); i++) {
+    for (size_t i = 0; i < min(chartBooks.size(), size_t(8)); i++) {
         if (i > 0) json << ",";
-        int percentage = (sortedBooks[i].second * 100) / maxCount;
+        int percentage = (chartBooks[i].second * 100) / maxCount;
         json << "{\"id\":" << (i + 1)
-             << ",\"title\":\"" << escapeJson(sortedBooks[i].first) << "\""
-             << ",\"issueCount\":" << sortedBooks[i].second
+             << ",\"title\":\"" << escapeJson(chartBooks[i].first) << "\""
+             << ",\"issueCount\":" << chartBooks[i].second
              << ",\"percentage\":" << percentage << "}";
     }
     json << "]";
@@ -299,6 +329,13 @@ bool addIssuedBook(int bookId, const string& bookTitle, const string& memberName
     newIssue.status = "Active";
     
     issuedBooks.push_back(newIssue);
+
+    if (issuedAnalyticsCounts.find(bookTitle) == issuedAnalyticsCounts.end()) {
+        issuedAnalyticsOrder.push_back(bookTitle);
+        issuedAnalyticsCounts[bookTitle] = 0;
+    }
+    issuedAnalyticsCounts[bookTitle]++;
+
     return true;
 }
 
